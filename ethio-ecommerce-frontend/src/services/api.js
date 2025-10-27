@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const API_URL = process.env.https://ethio-ecommerce-o8hm.onrender.com/api;;
+const API_URL = process.env.REACT_APP_API_URL;
 
-
+// Create axios instance
 const api = axios.create({
   baseURL: API_URL,
   headers: {

@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { toast } from 'react-toastify';  // ✅ Import toast
 import 'react-toastify/dist/ReactToastify.css'; // ✅ Import CSS once in your app (or in App.jsx)
 
-const apiBaseUrl = (process.env.https://ethio-ecommerce-o8hm.onrender.com/api; || 'http://localhost:5000/api').trim();
+const apiBaseUrl = (process.env.REACT_APP_API_URL || 'http://localhost:5000/api').trim();
 
 const resolveAssetBaseUrl = () => {
   const envAsset = (process.env.REACT_APP_ASSET_BASE_URL || '').trim();

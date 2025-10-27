@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get(`${process.env.https://ethio-ecommerce-o8hm.onrender.com/api;}/auth/me`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/auth/me`);
       setUser(response.data.data);
     } catch (error) {
       console.error('Failed to fetch user:', error);
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post(`${process.env.https://ethio-ecommerce-o8hm.onrender.com/api;}/auth/login`, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
         email,
         password
       });
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await axios.post(`${process.env.https://ethio-ecommerce-o8hm.onrender.com/api;}/auth/register`, userData);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, userData);
       
       const { token, data } = response.data;
       localStorage.setItem('token', token);
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
 
   const updateProfile = async (userData) => {
     try {
-      const response = await axios.put(`${process.env.https://ethio-ecommerce-o8hm.onrender.com/api;}/auth/updatedetails`, userData);
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/auth/updatedetails`, userData);
       setUser(response.data.data);
       return { success: true, data: response.data.data };
     } catch (error) {

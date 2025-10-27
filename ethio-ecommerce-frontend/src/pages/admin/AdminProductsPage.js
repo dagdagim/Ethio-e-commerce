@@ -5,7 +5,7 @@ import { productsAPI, categoriesAPI } from '../../services/api';
 import { useApp } from '../../contexts/AppContext';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
-const apiBaseUrl = (process.env.https://ethio-ecommerce-o8hm.onrender.com/api; || 'http://localhost:5000/api').trim();
+const apiBaseUrl = (process.env.REACT_APP_API_URL || 'http://localhost:5000/api').trim();
 
 const resolveAssetBaseUrl = () => {
   const envAsset = (process.env.REACT_APP_ASSET_BASE_URL || '').trim();
