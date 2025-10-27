@@ -27,6 +27,7 @@ import OrdersPage from './pages/OrdersPage';
 import OrderDetailPage from './pages/OrderDetailPage';
 import OrderPaymentPage from './pages/OrderPaymentPage';
 import OrderSuccessPage from './pages/OrderSuccessPage';
+import ContactPage from './pages/ContactPage';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -67,6 +68,7 @@ function App() {
                   <Route path="/cart" element={<CartPage />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/register" element={<RegisterPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
 
                   {/* =====================
                       PROTECTED ROUTES
