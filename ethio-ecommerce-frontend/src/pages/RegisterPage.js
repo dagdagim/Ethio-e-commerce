@@ -81,33 +81,34 @@ const RegisterPage = () => {
       return;
     }
 
-    // Normalize and validate Ethiopian phone number
-    const isValidEthiopianPhone = (raw) => {
-      if (!raw) return false;
-      // Remove all non-digit characters (spaces, dashes, parentheses, +)
+    // Normalize Ethiopian phone number and validate; return normalized E.164 format
+    const normalizeEthiopianPhone = (raw) => {
+      if (!raw) return null;
       const digits = raw.replace(/\D/g, '');
       let national = digits;
-      // Handle international format '251...' (without plus)
       if (digits.startsWith('251')) {
         national = digits.slice(3);
       } else if (digits.startsWith('0')) {
-        // Local format starting with 0
         national = digits.slice(1);
       }
-      // Now national should be 9 digits and not start with 0
-      return /^[1-9]\d{8}$/.test(national);
+      if (/^[1-9]\d{8}$/.test(national)) {
+        return `+251${national}`;
+      }
+      return null;
     };
 
-    if (!isValidEthiopianPhone(formData.phone)) {
+    const normalizedPhone = normalizeEthiopianPhone(formData.phone);
+    if (!normalizedPhone) {
       setError('Please enter a valid Ethiopian phone number (e.g. +251911234567 or 0911234567)');
       setLoading(false);
       return;
     }
 
-    // Prepare data for API (remove confirmPassword)
-    const { confirmPassword, ...registerData } = formData;
+  // Prepare data for API (remove confirmPassword) and set normalized phone
+  const { confirmPassword, ...registerData } = formData;
+  registerData.phone = normalizedPhone; // send E.164 formatted phone to backend
 
-    const result = await register(registerData);
+  const result = await register(registerData);
     
     if (result.success) {
       navigate(redirect);
@@ -255,7 +256,7 @@ const RegisterPage = () => {
                             onChange={handleChange}
                             required
                             placeholder="+251 91 123 4567"
-                            pattern="^(\\+251|0)[1-9]\\d{8}$"
+                            inputMode="tel"
                           />
                           <Form.Text className="text-muted">
                             Format: +251XXXXXXXXX or 09XXXXXXXX
